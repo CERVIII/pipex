@@ -6,7 +6,7 @@
 #    By: pcervill <pcervill@student.42madrid.com    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/03/25 20:25:05 by pcervill          #+#    #+#              #
-#    Updated: 2023/02/28 12:41:10 by pcervill         ###   ########.fr        #
+#    Updated: 2023/09/11 10:40:33 by pcervill         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -47,21 +47,21 @@ B		=	.
 all: $(NAME)
 
 $(NAME): $(OBJ)
-	ar rcs $(NAME) $(OBJ)
+	@ar rcs $(NAME) $(OBJ)
 
 bonus: $(B)
 	
 $(B):	$(OBJ) $(OBJB)
-	ar rcs $(NAME) $(OBJ) $(OBJB)
+	@ar rcs $(NAME) $(OBJ) $(OBJB)
 
 ####TARGETS####
 
 clean:
-	$(RM) $(OBJ) $(OBJB)
+	@$(RM) $(OBJ) $(OBJB)
 
 fclean:
-	$(RM) $(NAME)
-	$(RM) $(OBJ) $(OBJB)
+	@$(RM) $(NAME)
+	@$(RM) $(OBJ) $(OBJB)
 
 re: fclean all bonus
 
