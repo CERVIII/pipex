@@ -6,7 +6,7 @@
 /*   By: pcervill <pcervill@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/18 16:02:48 by pcervill          #+#    #+#             */
-/*   Updated: 2023/09/18 17:56:19 by pcervill         ###   ########.fr       */
+/*   Updated: 2023/09/19 09:53:43 by pcervill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,6 @@
 void	ft_error2(int code)
 {
 	perror("\x1B[31mError\x1B[0m");
-	errno
 	exit(code);
 }
 

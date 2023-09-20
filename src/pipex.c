@@ -6,7 +6,7 @@
 /*   By: pcervill <pcervill@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/04 10:32:25 by pcervill          #+#    #+#             */
-/*   Updated: 2023/09/18 17:35:18 by pcervill         ###   ########.fr       */
+/*   Updated: 2023/09/19 10:52:10 by pcervill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,7 @@ int	main(int argc, char *argv[], char *envp[])
 	int		fd[2];
 	pid_t	pid;
 
+	atexit(leaks);
 	if (argc == 5)
 	{
 		if (pipe(fd) == -1)
@@ -36,6 +37,5 @@ int	main(int argc, char *argv[], char *envp[])
 	}
 	else
 		ft_error2(1);
-	atexit(leaks);
 	return (0);
 }

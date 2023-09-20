@@ -1,5 +1,5 @@
 *.o
 *.a
-DS_Store
+*DS_Store
 infile
 outfile
