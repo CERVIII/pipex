@@ -6,7 +6,7 @@
 /*   By: pcervill <pcervill@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/04 10:37:19 by pcervill          #+#    #+#             */
-/*   Updated: 2023/09/18 17:56:37 by pcervill         ###   ########.fr       */
+/*   Updated: 2024/04/10 11:02:59 by pcervill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@
 # include <errno.h>
 
 /* UTILS.C */
-void	ft_error2(int code);
+void	ft_error2(int code, char *err);
 int		open_file(char *argv, int file_in_out);
 void	command(char *argv, char *envp[]);
 void	child_process(int *fd, char *argv[], char *envp[]);

@@ -6,7 +6,7 @@
 /*   By: pcervill <pcervill@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/18 16:27:16 by pcervill          #+#    #+#             */
-/*   Updated: 2023/09/18 17:32:28 by pcervill         ###   ########.fr       */
+/*   Updated: 2024/04/11 10:11:43 by pcervill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,6 @@ int	search_path(char **envp)
 			return (0);
 		i++;
 	}
-	ft_error2(1);
 	return (1);
 }
 
@@ -34,12 +33,12 @@ char	*check_path(char *cmd, char **envp)
 	char	*section_path;
 	char	*path;
 
-	if (access(cmd, F_OK) == 0)
+	if (access(cmd, X_OK) == 0)
 		return (cmd);
 	if (search_path(envp) == 1)
 		return (NULL);
 	i = 0;
-	while (ft_strnstr(envp[i], "PATH=", 5) == 0)
+	while (ft_strnstr(envp[i], "PATH=", i) == 0)
 		i++;
 	all_path = ft_split(envp[i] + 6, ':');
 	i = 0;

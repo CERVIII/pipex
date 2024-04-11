@@ -6,16 +6,17 @@
 /*   By: pcervill <pcervill@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/18 16:02:48 by pcervill          #+#    #+#             */
-/*   Updated: 2023/09/19 09:53:43 by pcervill         ###   ########.fr       */
+/*   Updated: 2024/04/11 13:07:47 by pcervill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/pipex.h"
 
-void	ft_error2(int code)
+void	ft_error2(int code, char *err)
 {
-	perror("\x1B[31mError\x1B[0m");
+	printf("%s\n", err);
 	exit(code);
+	return ;
 }
 
 int	open_file(char *argv, int file_in_out)
@@ -26,9 +27,9 @@ int	open_file(char *argv, int file_in_out)
 	if (file_in_out == 1)
 		file = open(argv, O_RDONLY);
 	if (file_in_out == 2)
-		file = open(argv, O_WRONLY | O_CREAT | O_TRUNC, 0777);
+		file = open(argv, O_WRONLY | O_CREAT | O_TRUNC, 0666);
 	if (file == -1)
-		ft_error2(1);
+		ft_error2(1, "Error: No such file or directory");
 	return (file);
 }
 
@@ -38,7 +39,8 @@ void	command(char *argv, char *envp[])
 
 	cmd = ft_split(argv, ' ');
 	if (execve(check_path(cmd[0], envp), cmd, envp) == -1)
-		ft_error2(127);
+		ft_error2(127, "Error: command not found");
+	return ;
 }
 
 void	child_process(int *fd, char *argv[], char *envp[])
@@ -51,6 +53,7 @@ void	child_process(int *fd, char *argv[], char *envp[])
 	close(fd[0]);
 	close(fd[1]);
 	command(argv[2], envp);
+	return ;
 }
 
 void	parent_process(int *fd, char *argv[], char *envp[])
@@ -63,4 +66,5 @@ void	parent_process(int *fd, char *argv[], char *envp[])
 	close(fd[1]);
 	close(fd[0]);
 	command(argv[3], envp);
+	return ;
 }
