@@ -6,7 +6,7 @@
 /*   By: pcervill <pcervill@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/18 16:02:48 by pcervill          #+#    #+#             */
-/*   Updated: 2024/04/11 13:07:47 by pcervill         ###   ########.fr       */
+/*   Updated: 2024/04/15 15:40:07 by pcervill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,10 @@
 
 void	ft_error2(int code, char *err)
 {
-	printf("%s\n", err);
+	if (code != 127)
+		perror(err);
+	else
+		ft_putstr_fd(err, 2);
 	exit(code);
 	return ;
 }
@@ -29,7 +32,7 @@ int	open_file(char *argv, int file_in_out)
 	if (file_in_out == 2)
 		file = open(argv, O_WRONLY | O_CREAT | O_TRUNC, 0666);
 	if (file == -1)
-		ft_error2(1, "Error: No such file or directory");
+		ft_error2(1, "Error");
 	return (file);
 }
 
@@ -39,7 +42,7 @@ void	command(char *argv, char *envp[])
 
 	cmd = ft_split(argv, ' ');
 	if (execve(check_path(cmd[0], envp), cmd, envp) == -1)
-		ft_error2(127, "Error: command not found");
+		ft_error2(127, "Error: command not found\n");
 	return ;
 }
 

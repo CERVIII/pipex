@@ -6,7 +6,7 @@
 /*   By: pcervill <pcervill@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/18 16:27:16 by pcervill          #+#    #+#             */
-/*   Updated: 2024/04/11 10:11:43 by pcervill         ###   ########.fr       */
+/*   Updated: 2024/04/15 15:04:42 by pcervill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,10 +20,10 @@ int	search_path(char **envp)
 	while (envp[i])
 	{
 		if (ft_strncmp(envp[i], "PATH=", 5) == 0)
-			return (0);
+			return (i);
 		i++;
 	}
-	return (1);
+	return (-1);
 }
 
 char	*check_path(char *cmd, char **envp)
@@ -35,11 +35,9 @@ char	*check_path(char *cmd, char **envp)
 
 	if (access(cmd, X_OK) == 0)
 		return (cmd);
-	if (search_path(envp) == 1)
+	i = search_path(envp);
+	if (i == -1)
 		return (NULL);
-	i = 0;
-	while (ft_strnstr(envp[i], "PATH=", i) == 0)
-		i++;
 	all_path = ft_split(envp[i] + 6, ':');
 	i = 0;
 	while (all_path[i])
