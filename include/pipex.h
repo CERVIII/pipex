@@ -6,7 +6,7 @@
 /*   By: pcervill <pcervill@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/04 10:37:19 by pcervill          #+#    #+#             */
-/*   Updated: 2024/04/15 15:41:34 by pcervill         ###   ########.fr       */
+/*   Updated: 2024/04/16 11:08:59 by pcervill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,9 @@
 # include <sys/wait.h>
 # include <fcntl.h>
 # include <errno.h>
+
+/* MAIN.C */
+void	check_father_pid(pid_t father_pid, int fd, char **argv, char **envp);
 
 /* UTILS.C */
 void	ft_error2(int code, char *err);

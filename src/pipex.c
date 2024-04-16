@@ -6,7 +6,7 @@
 /*   By: pcervill <pcervill@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/04 10:32:25 by pcervill          #+#    #+#             */
-/*   Updated: 2024/04/16 10:42:13 by pcervill         ###   ########.fr       */
+/*   Updated: 2024/04/16 11:08:21 by pcervill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,14 @@
 	system("leaks -q pipex");
 } */
 //		atexit(leaks);
+
+void	check_father_pid(pid_t father_pid, int fd, char **argv, char **envp)
+{
+	if (father_pid == -1)
+		ft_error2(1, "Error: fork");
+	if (father_pid == 0)
+		parent_process(fd, argv, envp);
+}
 
 int	main(int argc, char *argv[], char *envp[])
 {
@@ -35,10 +43,7 @@ int	main(int argc, char *argv[], char *envp[])
 	else
 	{
 		father_pid = fork();
-		if (father_pid == -1)
-			ft_error2(1, "Error: fork");
-		if (father_pid == 0)
-			parent_process(fd, argv, envp);
+		check_father_pid(father_pid, fd, argv, envp);
 		close(fd[0]);
 		close(fd[1]);
 		waitpid(child_pid, NULL, 0);
