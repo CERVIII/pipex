@@ -6,7 +6,7 @@
 /*   By: pcervill <pcervill@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/04 10:32:25 by pcervill          #+#    #+#             */
-/*   Updated: 2024/04/15 15:41:15 by pcervill         ###   ########.fr       */
+/*   Updated: 2024/04/16 10:42:13 by pcervill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,7 @@
 int	main(int argc, char *argv[], char *envp[])
 {
 	int		fd[2];
+	int		status;
 	pid_t	child_pid;
 	pid_t	father_pid;
 
@@ -41,7 +42,9 @@ int	main(int argc, char *argv[], char *envp[])
 		close(fd[0]);
 		close(fd[1]);
 		waitpid(child_pid, NULL, 0);
-		waitpid(father_pid, NULL, 0);
+		waitpid(father_pid, &status, 0);
+		if (WIFEXITED(status))
+			exit(WEXITSTATUS(status));
 	}
 	return (0);
 }
